@@ -1,0 +1,36 @@
+/* Media queries Breakpoint mixins */
+
+@mixin for-mobile-layout {
+  @media (max-width:$padded-break-narrow) {
+    @content;
+  }
+}
+
+@mixin for-narrow-layout {
+  @media (min-width:$padded-break-narrow) {
+    @content;
+  }
+}
+
+@mixin for-normal-layout {
+  @media (min-width: $padded-break-normal) {
+    @content;
+  }
+}
+
+@mixin for-wide-layout {
+  @media (min-width: $padded-break-wide) {
+    @content;
+  }
+}
+
+@mixin layoutGTC($max,$layoutPadding) {
+  grid-template-columns:
+    minmax(auto,$layoutPadding)
+    minmax($max,1fr)
+    minmax(auto,$layoutPadding);
+}
+
+
+
+

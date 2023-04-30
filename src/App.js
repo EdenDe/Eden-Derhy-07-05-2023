@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import './assets/scss/global.scss'
+
+import AppHeader from './components/AppHeader'
+import FavoritesPage from './views/FavoritesPage'
+import WeaterPage from './views/WeaterPage'
+import { Routes, Route, HashRouter as Router } from 'react-router-dom'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Router>
+			<section className="main-layout">
+				<AppHeader />
+				<main className="main-container-layout">
+					<Routes>
+						<Route path="/favorite" element={<FavoritesPage />} />
+						<Route path="/" element={<WeaterPage />} />
+					</Routes>
+				</main>
+			</section>
+		</Router>
+	)
 }
 
-export default App;
+export default App
