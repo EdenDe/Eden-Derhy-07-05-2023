@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import favoriteReducer from './favoriteSlice'
+import locationReducer from './weatherSlice'
 import { weatherApi } from './apiSlice'
 
 const rootReducer = combineReducers({
-	favorite: favoriteReducer,
+	location: locationReducer,
 	[weatherApi.reducerPath]: weatherApi.reducer,
 })
 
