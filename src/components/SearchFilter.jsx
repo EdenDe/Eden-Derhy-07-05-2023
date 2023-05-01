@@ -1,72 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import { Input, TextField, InputAdornment, FormHelperText, FormControl, Autocomplete } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
+import React, { useState } from 'react'
+import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
+import { useGetCitiesQuery } from '../store/apiSlice'
 import { utilService } from '../services/util.service'
 
-export default function SearchFilter({ options, findLocation, getDetails }) {
-	//const [searchInput, setSeachInput] = useState({name:'tel aviv',key:'11'})
-	const [error, setError] = useState(null)
+export default function SearchFilter({ getDetails }) {
+	const [searchInput, setSeachInput] = useState('tel aviv')
+	const [inputError, setInputError] = useState(null)
+
+	const { data: options, isLoading, error } = useGetCitiesQuery(searchInput, [searchInput])
 
 	function changeHandler(ev) {
-		const { value } = ev.target
+		const { value = '' } = ev.target
 
-		//if(searchInput.name === value) return
-
-		// setSeachInput({
-		//   name: value,
-		//   key: dataset.id? dataset.id : null
-		// })
-
-		if (options[value]) {
-			getDetails(options[value].key)
+		if (value === searchInput) return
+		if (!/^[a-zA-Z]+$/.test(value) && value !== '') {
+			setInputError('invalid input')
 			return
-		} else {
-			const debounceSendRequest = utilService.debounce(() => findLocation(value), 1000)
-			debounceSendRequest()
+		}
+
+		const setDebounceInput = utilService.debounce(() => setSeachInput(value), 1000)
+		setDebounceInput()
+		setInputError(null)
+
+		if (options && options[value]) {
+			getDetails(value, options[value].id)
 		}
 	}
-
-	// useEffect(()=>{
-	//   if(searchInput){
-
-	//   }
-
-	// },[searchInput])
 
 	return (
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
-					options={Object.keys(options)}
+					loading={isLoading}
+					options={isLoading || error ? [] : Object.keys(options)}
 					renderOption={(props, option) => (
 						<option {...props} value={option}>
 							{option}
 						</option>
 					)}
-					onChange={changeHandler}
+					//value={searchInput}
+					onSelect={changeHandler}
+					//onChange={changeHandler}
 					renderInput={params => (
 						<TextField
-							{...params}
+							error={!!inputError}
 							onChange={changeHandler}
-							label='Select an option'
+							{...params}
+							label='Select a city'
 							variant='outlined'
-							// value={searchInput.name}
 						/>
 					)}
 				/>
 
-				{/* <Input
-        id="input-with-icon-adornment"
-        startAdornment={
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        }
-        defaultValue='tel aviv'
-        onChange={changeHandler}
-       
-      /> */}
-				{error && <FormHelperText id='component-error-text'>Error</FormHelperText>}
+				{inputError && (
+					<FormHelperText error id='component-error-text'>
+						{inputError}
+					</FormHelperText>
+				)}
 			</FormControl>
 		</section>
 	)
