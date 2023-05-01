@@ -3,12 +3,12 @@ $clr0: #fff;
 $clr1: rgb(236, 196, 86);
 
 // LAYOUT BREAKPOINTS
-$break-narrow: 600px;
-$break-normal: 768px;
-$break-wide: 900px;
+$break-narrow: 400px;
+$break-normal: 500px;
+$break-wide: 800px;
 
 $layoutPaddingLarge: 100px;
-$layoutPaddingMedium: 80px;
+$layoutPaddingMedium: 70px;
 $layoutPaddingSmall: 10px;
 
 $padded-break-narrow: $break-narrow + $layoutPaddingSmall * 2;

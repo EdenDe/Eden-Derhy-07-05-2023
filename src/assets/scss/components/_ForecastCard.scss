@@ -1,0 +1,17 @@
+.forecast-card {
+	justify-content: center;
+	text-align: center;
+
+	.img-wrapper {
+		min-width: 150px;
+		place-self: center;
+	}
+
+	.temp-details {
+		gap: 15px;
+
+		.min-temp {
+			color: grey;
+		}
+	}
+}

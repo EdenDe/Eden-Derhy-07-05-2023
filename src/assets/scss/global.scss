@@ -1,23 +1,23 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
 
 // Basics
-@import "basics/base";
-@import "basics/helpers";
-@import "basics/layout";
+@import 'basics/base';
+@import 'basics/helpers';
+@import 'basics/layout';
 
 // Views
-@import "views/WeatherPage";
-@import "views/FavoritePage";
+@import 'views/WeatherPage';
+@import 'views/FavoritePage';
 
 // Components
-@import "components/appHeader";
-
-
-
-
+@import 'components/AppHeader';
+@import 'components/ForecastCard';
+@import 'components/ForecastList';
+@import 'components/SearchFilter';
+@import 'components/Forecast';
 // .main-app {
 //     min-height: 100vh;
 //     display: flex;

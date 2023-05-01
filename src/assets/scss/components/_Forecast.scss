@@ -1,0 +1,10 @@
+.forecast {
+	.icon-heart {
+		stroke: black;
+		fill: white;
+
+		&.favorite {
+			fill: red;
+		}
+	}
+}

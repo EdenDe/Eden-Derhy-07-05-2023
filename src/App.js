@@ -2,7 +2,7 @@ import './assets/scss/global.scss'
 
 import AppHeader from './components/AppHeader'
 import FavoritesPage from './views/FavoritesPage'
-import WeaterPage from './views/WeaterPage'
+import WeatherPage from './views/WeatherPage'
 import { Routes, Route, HashRouter as Router } from 'react-router-dom'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 				<main className="main-container-layout">
 					<Routes>
 						<Route path="/favorite" element={<FavoritesPage />} />
-						<Route path="/" element={<WeaterPage />} />
+						<Route path="/" element={<WeatherPage />} />
 					</Routes>
 				</main>
 			</section>
