@@ -1,16 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { ApiProvider } from '@reduxjs/toolkit/query/react'
 import { store } from './store/store'
-import { weatherApi } from './store/apiSlice'
 import { Provider } from 'react-redux'
+import ThemeContextWrapper from './theme/ThemeContextWrapper'
+import { setFavorites } from './store/locationSlice'
+
+store.dispatch(setFavorites())
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-	// <React.StrictMode>
-	<Provider store={store}>
-		<App />
-	</Provider>
-	// </React.StrictMode>
+	<React.StrictMode>
+		<ThemeContextWrapper>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</ThemeContextWrapper>
+	</React.StrictMode>
 )

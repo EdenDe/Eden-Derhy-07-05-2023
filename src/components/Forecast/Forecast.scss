@@ -1,0 +1,24 @@
+@import '../../assets/scss/setup/functions';
+
+.forecast {
+	padding: em(30px);
+	font-size: em(20px);
+	.icon-heart {
+		stroke: black;
+		fill: white;
+
+		&.favorite {
+			fill: red;
+		}
+	}
+
+	.action-btns {
+		margin-left: auto;
+	}
+
+	.weather-txt {
+		font-size: em(30px);
+		text-align: center;
+		margin: em(10px);
+	}
+}

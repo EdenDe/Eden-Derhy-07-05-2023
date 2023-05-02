@@ -1,24 +1,27 @@
 import React, { useState } from 'react'
 import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
-import { useGetCitiesQuery } from '../store/apiSlice'
-import { utilService } from '../services/util.service'
+import { useGetCitiesQuery } from '../../store/apiSlice'
+import { utils } from '../../helpers/utils'
+import './SearchFilter.scss'
 
 export default function SearchFilter({ getDetails }) {
-	const [searchInput, setSeachInput] = useState('tel aviv')
+	const [searchInput, setSearchInput] = useState('tel aviv')
 	const [inputError, setInputError] = useState(null)
 
 	const { data: options, isLoading, error } = useGetCitiesQuery(searchInput, [searchInput])
+
+	console.log(error)
 
 	function changeHandler(ev) {
 		const { value = '' } = ev.target
 
 		if (value === searchInput) return
-		if (!/^[a-zA-Z]+$/.test(value) && value !== '') {
+		if (utils.regexCheckEngLettersOnly(value)) {
 			setInputError('invalid input')
 			return
 		}
 
-		const setDebounceInput = utilService.debounce(() => setSeachInput(value), 1000)
+		const setDebounceInput = utils.debounce(() => setSearchInput(value), 1000)
 		setDebounceInput()
 		setInputError(null)
 
@@ -31,6 +34,8 @@ export default function SearchFilter({ getDetails }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
+					className='autocomplete'
+					disabled={true}
 					loading={isLoading}
 					options={isLoading || error ? [] : Object.keys(options)}
 					renderOption={(props, option) => (
@@ -38,9 +43,7 @@ export default function SearchFilter({ getDetails }) {
 							{option}
 						</option>
 					)}
-					//value={searchInput}
 					onSelect={changeHandler}
-					//onChange={changeHandler}
 					renderInput={params => (
 						<TextField
 							error={!!inputError}

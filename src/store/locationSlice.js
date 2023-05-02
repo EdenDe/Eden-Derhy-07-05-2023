@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { favoriteService } from '../services/favorite.service'
+import { favoriteService } from '../helpers/favorite.service'
 
 export const saveToFavs = createAsyncThunk('location/saveToFavs', async (locationData, { getState }) => {
 	const { currLocation } = getState().location
@@ -21,10 +21,14 @@ const locationSlice = createSlice({
 	initialState: {
 		currLocation: { name: 'tel aviv', id: '215854' },
 		favorites: [],
+		lastForecast: {},
 	},
 	reducers: {
-		setCurrLocation: (state, action) => {
-			state = { ...state, currLocation: action.payload }
+		setCurrLocation(state, action) {
+			state.currLocation = action.payload
+		},
+		setLastForecast(state, action) {
+			state.lastForecast = action.payload
 		},
 	},
 	extraReducers: builder => {
@@ -42,5 +46,4 @@ const locationSlice = createSlice({
 })
 
 export default locationSlice.reducer
-export const { setCurrLocation } = locationSlice.actions
-// Other code such as selectors can use the imported `RootState` type
+export const { setCurrLocation, setLastForecast } = locationSlice.actions

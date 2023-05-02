@@ -1,5 +1,6 @@
 import React from 'react'
-import ForecastCard from './ForecastCard'
+import ForecastCard from '../ForecastCard/ForecastCard'
+import './ForecastList.scss'
 
 export default function ForecastList({ forecastList, setLocation }) {
 	return (

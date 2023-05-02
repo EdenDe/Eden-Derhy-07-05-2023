@@ -1,6 +1,7 @@
 .forecast-card {
 	justify-content: center;
 	text-align: center;
+	padding: 10px;
 
 	&.location-card {
 		cursor: pointer;
@@ -8,6 +9,10 @@
 		&:hover {
 			scale: 1.02;
 		}
+	}
+
+	h5 {
+		text-transform: capitalize;
 	}
 
 	.img-wrapper {

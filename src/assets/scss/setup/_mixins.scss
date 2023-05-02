@@ -30,3 +30,26 @@
 		minmax($max, 1fr)
 		minmax(auto, $layoutPadding);
 }
+
+@mixin themeColors($txtClr: $clr3, $bgColor: $clr0) {
+	background-color: $bgColor;
+	color: $txtClr;
+
+	&.dark-mode,
+	body.dark-mode & {
+		background-color: $txtClr;
+		* {
+			color: $bgColor;
+		}
+	}
+}
+
+// @mixin themeColorsPrimary($txtColor: $clr3, $backgroundColor: $clr0) {
+// 	&.dark-mode,
+// 	body.dark-mode & {
+// 		background-color: $backgroundColor;
+// 		* {
+// 			color: $txtColor;
+// 		}
+// 	}
+// }

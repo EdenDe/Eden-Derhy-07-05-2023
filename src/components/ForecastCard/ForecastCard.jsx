@@ -1,5 +1,6 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
+import './ForecastCard.scss'
 
 export default function ForecastCard({ forecast, setLocation }) {
 	const isLocationCard = !!forecast.currWeather

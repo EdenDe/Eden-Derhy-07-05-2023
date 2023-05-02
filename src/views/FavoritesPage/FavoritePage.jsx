@@ -1,8 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ForecastList from '../components/ForecastList'
-import { setCurrLocation } from '../store/weatherSlice'
+import ForecastList from '../../components/ForecastList/ForecastList'
+import { setCurrLocation } from '../../store/locationSlice'
 import { useNavigate } from 'react-router-dom'
+import './FavoritePage.scss'
 
 export default function FavoritesPage() {
 	const favorites = useSelector(state => state.location.favorites)

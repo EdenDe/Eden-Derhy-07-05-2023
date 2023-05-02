@@ -1,12 +1,12 @@
 import React from 'react'
-import SearchFilter from '../components/SearchFilter'
-import Forecast from '../components/Forecast'
+import SearchFilter from '../../components/SearchFilter/SearchFilter'
+import Forecast from '../../components/Forecast/Forecast'
 import { useDispatch } from 'react-redux'
-import { saveToFavs, removeFromFavs, setCurrLocation } from '../store/weatherSlice'
+import { saveToFavs, removeFromFavs, setCurrLocation } from '../../store/locationSlice'
+import './WeatherPage.scss'
 
 export const WeatherPage = () => {
 	const dispatch = useDispatch()
-	console.log('weather')
 
 	function getDetails(name, id) {
 		dispatch(setCurrLocation({ name, id }))

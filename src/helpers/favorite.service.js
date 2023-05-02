@@ -1,11 +1,8 @@
 'use strict'
 
-import { utilService } from './util.service.js'
-import { storageService } from './async-storage.service.js'
+import { storageService } from './async-storage.js'
 
 const FAVORITES_KEY = 'favoriteDB'
-
-//_createFavorites()
 
 export const favoriteService = {
 	query,

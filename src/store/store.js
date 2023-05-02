@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import locationReducer from './weatherSlice'
+import locationReducer from './locationSlice'
 import { weatherApi } from './apiSlice'
 
 const rootReducer = combineReducers({
@@ -9,5 +9,5 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
 	reducer: rootReducer,
-	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(weatherApi.middleware),
+	middleware: getDefaultMiddleware => [...getDefaultMiddleware(), weatherApi.middleware],
 })
