@@ -44,12 +44,11 @@
 	}
 }
 
-// @mixin themeColorsPrimary($txtColor: $clr3, $backgroundColor: $clr0) {
-// 	&.dark-mode,
-// 	body.dark-mode & {
-// 		background-color: $backgroundColor;
-// 		* {
-// 			color: $txtColor;
-// 		}
-// 	}
-// }
+@mixin themify($property, $key, $themes: $themes) {
+	@each $theme, $colors in $themes {
+		&.#{$theme}-mode,
+		.#{$theme}-mode & {
+			#{$property}: map-get($colors, $key);
+		}
+	}
+}

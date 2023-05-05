@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ForecastList from '../../components/ForecastList/ForecastList'
 import { setCurrLocation } from '../../store/locationSlice'
 import { useNavigate } from 'react-router-dom'
+import { ReactComponent as EmptySvg } from '../../assets/svg/empty.svg'
 import './FavoritePage.scss'
 
 export default function FavoritesPage() {
@@ -16,8 +17,12 @@ export default function FavoritesPage() {
 	}
 
 	return (
-		<section>
-			<ForecastList forecastList={favorites} setLocation={setLocation} />
+		<section className='favorite-page'>
+			{favorites.length ? (
+				<ForecastList forecastList={favorites} setLocation={setLocation} />
+			) : (
+				<EmptySvg />
+			)}
 		</section>
 	)
 }

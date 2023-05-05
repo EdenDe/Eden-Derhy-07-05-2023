@@ -6,17 +6,12 @@ const FAVORITES_KEY = 'favoriteDB'
 
 export const favoriteService = {
 	query,
-	get,
 	remove,
 	save,
 }
 
 function query() {
 	return storageService.query(FAVORITES_KEY)
-}
-
-function get(favoriteId) {
-	return storageService.get(FAVORITES_KEY, favoriteId)
 }
 
 function remove(favoriteId) {

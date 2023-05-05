@@ -8,7 +8,7 @@ export default function ForecastCard({ forecast, setLocation }) {
 	const weatherDetails = isLocationCard ? forecast.currWeather : forecast
 	const { minTemp, maxTemp, date, weatherIcon } = weatherDetails
 	const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(date))
-	const imgSrc = `https://developer.accuweather.com/sites/default/files/${weatherIcon}-s.png`
+	const imgSrc = `${process.env.REACT_APP_API_WEATHER_ICON}${weatherIcon}-s.png`
 
 	function onChooseCard() {
 		if (!isLocationCard) return
@@ -16,7 +16,10 @@ export default function ForecastCard({ forecast, setLocation }) {
 	}
 
 	return (
-		<Card className={`forecast-card grid ${isLocationCard ? 'location-card' : ''}`} onClick={onChooseCard}>
+		<Card
+			className={`forecast-card grid ${isLocationCard ? 'location-card' : ''}`}
+			onClick={onChooseCard}
+		>
 			<Typography variant='h5'>{isLocationCard ? forecast.name : dayName}</Typography>
 			<div className='img-wrapper'>
 				<CardMedia alt={weatherIcon} image={imgSrc} component='img' />

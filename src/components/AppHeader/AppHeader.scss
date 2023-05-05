@@ -1,25 +1,24 @@
 @import '../../assets/scss/setup/variables';
+@import '../../assets/scss/setup/mixins';
+@import '../../assets/scss/setup/functions';
 
 .app-header {
 	height: 10vh;
 	align-items: center;
 	justify-content: flex-start;
-	background-color: $primary1;
-	color: $clr2;
 	box-shadow: 1px -1px 4px 1px $clr3;
-
-	&.dark-mode {
-		background-color: darken($clr3, 8);
-
-		.logo {
-			color: $primary1;
-			font-weight: bold;
-		}
-	}
+	@include themify('background-color', 'header-bg');
+	@include themify('color', 'header-fc');
 
 	.logo {
 		text-transform: uppercase;
-		font-size: em(25px);
+		letter-spacing: 5px;
+		font-size: em(35px);
+		@include themify('color', 'logo-fc');
+	}
+
+	.action-btn {
+		margin-left: auto;
 	}
 
 	.nav-bar {
@@ -32,6 +31,47 @@
 
 			&.active {
 				color: $secondary;
+			}
+		}
+	}
+
+	.nav-ham {
+		display: none;
+	}
+
+	@include for-mobile-layout {
+		justify-content: flex-end;
+		align-items: center;
+
+		.nav-bar {
+			display: none;
+		}
+
+		.nav-ham {
+			display: flex;
+		}
+
+		.nav-bar.open {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+
+			position: absolute;
+			top: 10vh;
+			left: 0;
+
+			z-index: 200;
+			margin-top: 5px;
+			background-color: $clr1;
+			padding: 10px;
+			width: 60vw;
+			@include themify('background-color', 'bg');
+			@include themify('color', 'fc');
+
+			a {
+				border-bottom: 1px solid $clr2;
+				padding: 10px;
+				margin: 0;
 			}
 		}
 	}

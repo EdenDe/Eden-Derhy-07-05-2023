@@ -9,10 +9,13 @@ html {
 body {
 	margin: 0;
 	height: 100vh;
-	font-family: Calibri, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-		'Helvetica Neue', sans-serif;
+	font-family: $didactGothic;
 	font-size: 16px;
-	@include themeColors;
+}
+
+::selection {
+	background-color: $primary1;
+	color: $clr3;
 }
 
 img {
@@ -24,7 +27,12 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+	margin: 0;
+	padding: 0;
+	font-family: $sigmar;
+}
+
 p {
 	margin: 0;
 	padding: 0;
@@ -44,21 +52,20 @@ input {
 	font-family: inherit;
 }
 
-// MAC like scrollbar
 ::-webkit-scrollbar {
-	width: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	-webkit-border-radius: 100px;
+	width: 10px;
+	height: 10px;
 }
 
-::-webkit-scrollbar:hover {
-	background-color: rgba(0, 0, 0, 0.09);
+::-webkit-scrollbar-track {
+	background-color: $clr0;
 }
 
-::-webkit-scrollbar-thumb:vertical {
-	-webkit-border-radius: 100px;
+::-webkit-scrollbar-thumb {
+	background-color: lighten($clr2, 10);
+	border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:vertical:active {
-	-webkit-border-radius: 100px;
+::-webkit-scrollbar-thumb:hover {
+	background-color: #555;
 }

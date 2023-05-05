@@ -14,11 +14,18 @@ export const weatherApi = createApi({
 				`forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&language=en-us&details=false&metric=true`,
 			transformResponse: ({ DailyForecasts }) =>
 				DailyForecasts.map(({ Date, Day, Temperature }) => {
-					return createWeather(Date, Day.Icon, Day.IconPhrase, Temperature.Maximum, Temperature.Minimum)
+					return _createWeather(
+						Date,
+						Day.Icon,
+						Day.IconPhrase,
+						Temperature.Maximum,
+						Temperature.Minimum
+					)
 				}),
 		}),
 		getCities: builder.query({
-			query: locationName => `locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${locationName}&language=en-us`,
+			query: locationName =>
+				`locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${locationName}&language=en-us`,
 			transformResponse: result => {
 				return result?.reduce((newObj, location) => {
 					newObj[location.LocalizedName] = { id: location.Key }
@@ -31,13 +38,18 @@ export const weatherApi = createApi({
 				`currentconditions/v1/${locationKey}?apikey=${API_KEY}&language=en-us&details=false HTTP/1.1`,
 			transformResponse: result => {
 				const { LocalObservationDateTime, WeatherIcon, WeatherText, Temperature } = result[0]
-				return createWeather(LocalObservationDateTime, WeatherIcon, WeatherText, Temperature['Metric'])
+				return _createWeather(
+					LocalObservationDateTime,
+					WeatherIcon,
+					WeatherText,
+					Temperature['Metric']
+				)
 			},
 		}),
 	}),
 })
 
-function createWeather(date, weatherIcon, weatherText, maxTemp, minTemp) {
+function _createWeather(date, weatherIcon, weatherText, maxTemp, minTemp) {
 	return {
 		id: utils.makeId(7),
 		date,

@@ -21,7 +21,7 @@ export const getDesignTokens = mode => ({
 					divider: '#ffe168',
 					background: {
 						default: '#202124',
-						paper: '#919191',
+						paper: '#555555',
 					},
 					text: {
 						primary: '#e8eaed',

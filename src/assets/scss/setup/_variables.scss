@@ -1,5 +1,8 @@
-// Colors
+//FONTS
+$sigmar: 'Sigmar', cursive, 'sans serif';
+$didactGothic: 'didactGothic', cursive, 'sans serif';
 
+// Colors
 $clr0: #fff;
 $clr1: #e8eaed;
 $clr2: #919191;
@@ -22,3 +25,20 @@ $layoutPaddingSmall: 10px;
 $padded-break-narrow: $break-narrow + $layoutPaddingSmall * 2;
 $padded-break-normal: $break-normal + $layoutPaddingMedium * 2;
 $padded-break-wide: $break-wide + $layoutPaddingLarge * 2;
+
+$themes: (
+	light: (
+		bg: $clr1,
+		fc: $clr3,
+		header-bg: $primary1,
+		header-fc: $clr2,
+		logo-fc: $clr1,
+	),
+	dark: (
+		bg: $clr3,
+		fc: $clr1,
+		header-bg: darken($clr3, 8),
+		header-fc: $clr1,
+		logo-fc: $primary1,
+	),
+);

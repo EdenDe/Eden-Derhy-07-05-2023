@@ -1,5 +1,7 @@
 .search-filter {
+	display: grid;
 	.form-control {
-		min-width: 200px;
+		min-width: 300px;
+		justify-self: center;
 	}
 }

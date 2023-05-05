@@ -2,6 +2,7 @@ export const utils = {
 	makeId,
 	debounce,
 	regexCheckEngLettersOnly,
+	isDateBeforeToday,
 }
 
 function makeId(length = 6) {
@@ -28,4 +29,8 @@ function debounce(func, timeout = 300) {
 
 function regexCheckEngLettersOnly(value) {
 	return !/^[a-zA-Z]+$/.test(value) && value !== ''
+}
+
+function isDateBeforeToday(date) {
+	return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString())
 }

@@ -1,32 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
-import { useGetCitiesQuery } from '../../store/apiSlice'
 import { utils } from '../../helpers/utils'
 import './SearchFilter.scss'
+import { apiWeather } from '../../helpers/apiWeatherCalls'
+import { useSelector } from 'react-redux'
 
-export default function SearchFilter({ getDetails }) {
-	const [searchInput, setSearchInput] = useState('tel aviv')
-	const [inputError, setInputError] = useState(null)
+export default function SearchFilter({ setLocation }) {
+	const currLocation = useSelector(state => state.location.currLocation.name)
 
-	const { data: options, isLoading, error } = useGetCitiesQuery(searchInput, [searchInput])
+	const [options, setOptions] = useState([])
+	const [error, setError] = useState(null)
 
-	console.log(error)
+	async function getOptions(searchInput) {
+		try {
+			const options = await apiWeather.getCities(searchInput)
+			setOptions(options)
+		} catch (error) {
+			setError('sorry, an error occurred, please try again later')
+		}
+	}
 
 	function changeHandler(ev) {
 		const { value = '' } = ev.target
 
-		if (value === searchInput) return
+		if (value === currLocation.name) return
 		if (utils.regexCheckEngLettersOnly(value)) {
-			setInputError('invalid input')
+			setError('invalid input')
 			return
 		}
 
-		const setDebounceInput = utils.debounce(() => setSearchInput(value), 1000)
+		const setDebounceInput = utils.debounce(() => getOptions(value), 1000)
 		setDebounceInput()
-		setInputError(null)
+		setError(null)
 
 		if (options && options[value]) {
-			getDetails(value, options[value].id)
+			setLocation(value, options[value].id)
 		}
 	}
 
@@ -35,9 +43,8 @@ export default function SearchFilter({ getDetails }) {
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
 					className='autocomplete'
-					disabled={true}
-					loading={isLoading}
-					options={isLoading || error ? [] : Object.keys(options)}
+					disabled={!!error}
+					options={Object.keys(options)}
 					renderOption={(props, option) => (
 						<option {...props} value={option}>
 							{option}
@@ -46,7 +53,7 @@ export default function SearchFilter({ getDetails }) {
 					onSelect={changeHandler}
 					renderInput={params => (
 						<TextField
-							error={!!inputError}
+							error={!!error}
 							onChange={changeHandler}
 							{...params}
 							label='Select a city'
@@ -55,9 +62,9 @@ export default function SearchFilter({ getDetails }) {
 					)}
 				/>
 
-				{inputError && (
+				{error && (
 					<FormHelperText error id='component-error-text'>
-						{inputError}
+						{error}
 					</FormHelperText>
 				)}
 			</FormControl>

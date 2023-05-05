@@ -9,7 +9,6 @@ export default function ThemeContextWrapper(props) {
 	const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light')
 
 	const theme = useMemo(() => {
-		document.body.classList.toggle('dark-mode', mode === 'dark')
 		return createTheme(getDesignTokens(mode))
 	}, [mode])
 
@@ -23,7 +22,7 @@ export default function ThemeContextWrapper(props) {
 	)
 
 	return (
-		<ThemeContext.Provider value={toggleTheme}>
+		<ThemeContext.Provider value={{ toggleTheme, theme }}>
 			<ThemeProvider theme={theme}>{props.children}</ThemeProvider>
 		</ThemeContext.Provider>
 	)

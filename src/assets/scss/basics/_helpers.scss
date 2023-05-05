@@ -47,3 +47,18 @@
 [data-temp-unit]::after {
 	content: '°' attr(data-temp-unit);
 }
+
+.loader-wrapper {
+	.loader {
+		place-self: center;
+	}
+}
+
+svg {
+	max-width: 500px;
+	justify-self: center;
+
+	@include for-mobile-layout {
+		max-width: 300px;
+	}
+}
