@@ -27,7 +27,7 @@
 }
 
 .main-container-layout {
-	padding-top: 3vh;
-	min-height: calc(100vh - em(90px));
+	padding-top: rem(20px);
+	min-height: calc(100vh - rem(90px));
 	display: grid;
 }

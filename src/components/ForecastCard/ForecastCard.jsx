@@ -1,8 +1,7 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
-import './ForecastCard.scss'
 import { useSelector } from 'react-redux'
 import { utils } from '../../helpers/utils'
+import './ForecastCard.scss'
 
 export default function ForecastCard({ forecast, setLocation }) {
 	const prefUnit = useSelector(state => state.userPref.tempUnit)

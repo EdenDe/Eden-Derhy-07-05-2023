@@ -5,7 +5,7 @@
 .forecast-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-	gap: em(30px);
+	gap: em(20px);
 	justify-content: center;
 	align-content: start;
 

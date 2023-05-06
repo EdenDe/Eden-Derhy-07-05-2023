@@ -2,9 +2,8 @@ import { useMemo } from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useSelector } from 'react-redux'
 import ErrorMsg from '../../../components/ErrorMsg/ErrorMsg'
-import SkeletonList from '../../../components/ForecastList/SkeletonList'
 import ForecastList from '../../../components/ForecastList/ForecastList'
-import { IconButton } from '@mui/material'
+import { CircularProgress, IconButton } from '@mui/material'
 import { utils } from '../../../helpers/utils'
 import './Forecast.scss'
 
@@ -13,7 +12,6 @@ export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	const currLocation = useSelector(state => state.location.currLocation)
 	const status = useSelector(state => state.location.status)
 	const prefUnit = useSelector(state => state.userPref.tempUnit)
-	//const status = 'loading'
 
 	const isFav = useMemo(
 		() => favorites.some(fav => fav.id === currLocation.id),
@@ -21,7 +19,11 @@ export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	)
 
 	if (status === 'loading') {
-		return <SkeletonList length={5} />
+		return (
+			<div className='loader-wrapper'>
+				<CircularProgress className='loader' size={64} />
+			</div>
+		)
 	}
 
 	if (status === 'failed') {

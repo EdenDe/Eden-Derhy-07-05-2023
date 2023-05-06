@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { ReactComponent as ErrorSvg } from '../../assets/svg/notFound.svg'
 import '../ErrorMsg/ErrorMsg.scss'
 

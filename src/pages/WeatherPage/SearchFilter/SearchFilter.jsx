@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
 import { weatherApi } from '../../../helpers/weatherApi'
 import { utils } from '../../../helpers/utils'

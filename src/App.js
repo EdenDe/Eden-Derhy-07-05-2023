@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import './assets/scss/global.scss'
 
 import AppHeader from './components/AppHeader/AppHeader'

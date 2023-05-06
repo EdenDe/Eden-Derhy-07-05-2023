@@ -1,4 +1,3 @@
-import React from 'react'
 import SearchFilter from '../WeatherPage/SearchFilter/SearchFilter'
 import Forecast from '../WeatherPage/Forecast/Forecast'
 import { useDispatch } from 'react-redux'
@@ -8,7 +7,6 @@ import {
 	setCurrLocation,
 	loadLocation,
 } from '../../store/locationSlice'
-import './WeatherPage.scss'
 
 export default function WeatherPage() {
 	const dispatch = useDispatch()

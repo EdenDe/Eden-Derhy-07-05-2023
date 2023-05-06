@@ -3,10 +3,10 @@
 @import '../../../assets/scss/setup/variables';
 
 .forecast {
-	padding: em(10px) em(30px) em(30px);
+	padding: em(10px) em(30px) em(10px);
 	font-size: em(20px);
 	display: grid;
-	height: 88%;
+	height: 85%;
 
 	.curr-weather-details {
 		max-width: 1100px;
@@ -43,13 +43,15 @@
 
 		.location-temp {
 			grid-area: locationTemp;
-			font-size: em(50px);
+			font-size: clamp(em(30px), 6vw, em(50px));
 			font-weight: 600;
 			place-self: center;
 		}
 
 		.location-date {
 			grid-area: locationDate;
+			align-self: center;
+			font-size: clamp(em(13px), 2.5vw, em(20px));
 		}
 
 		.weather-img {
@@ -60,16 +62,21 @@
 			grid-area: locationName;
 			align-self: center;
 			text-transform: capitalize;
-			font-size: em(25px);
+			font-size: clamp(em(20px), 5vw, em(25px));
 		}
 
 		@include for-mobile-layout {
-			grid-template-columns: 0.5fr 1fr 1fr;
+			grid-template-columns: 0.4fr 1fr 0.5fr;
+			gap: em(5px);
 			grid-template-areas:
 				'heartBtn locationName locationName'
 				'nothing locationDate locationDate'
-				'locationTemp locationTemp weatherImg'
-				'locationTemp locationTemp weatherText';
+				'nothing locationTemp weatherImg'
+				'nothing locationTemp weatherText';
+		}
+
+		.location-temp {
+			justify-self: start;
 		}
 	}
 }
