@@ -51,7 +51,7 @@ async function getCurrWeather(locationKey, isMetric) {
 	try {
 		const result = await axios.get(
 			BASE_URL +
-				`currentconditions/v1/${locationKey}?apikey=${API_KEY}&language=en-us&details=false HTTP/1.1`
+				`currentconditions/v1/${locationKey}?apikey=${API_KEY}&language=en-us&details=false`
 		)
 
 		const { LocalObservationDateTime, WeatherIcon, WeatherText, Temperature } = result.data[0]
