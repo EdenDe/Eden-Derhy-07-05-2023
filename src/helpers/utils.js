@@ -28,7 +28,7 @@ function debounce(func, timeout = 300) {
 }
 
 function regexCheckEngLettersOnly(value) {
-	return !/^[a-zA-Z]+$/.test(value) && value !== ''
+	return !/^[a-zA-Z]+$/.test(value)
 }
 
 function isDateBeforeToday(date) {

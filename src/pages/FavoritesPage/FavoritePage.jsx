@@ -17,7 +17,7 @@ export default function FavoritesPage() {
 	}
 
 	return (
-		<section className='favorite-page'>
+		<section className='favorite-page grid'>
 			{favorites.length ? (
 				<ForecastList forecastList={favorites} setLocation={setLocation} />
 			) : (

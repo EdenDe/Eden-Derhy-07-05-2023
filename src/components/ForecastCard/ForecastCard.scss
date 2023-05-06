@@ -1,9 +1,14 @@
 @import '../../assets/scss/setup/variables';
+@import '../../assets/scss/setup/functions';
 
 .forecast-card {
 	justify-content: center;
 	text-align: center;
-	padding: 10px;
+	padding: em(5px);
+
+	* {
+		justify-self: center;
+	}
 
 	&.location-card {
 		cursor: pointer;
@@ -15,23 +20,16 @@
 
 	h5 {
 		text-transform: capitalize;
-		font-family: $didactGothic;
 		font-weight: 600;
 	}
 
-	.img-wrapper {
-		min-width: 150px;
-		place-self: center;
+	.weather-img {
+		height: 45px;
+		width: 75px;
 	}
 
 	.temp-details {
-		gap: 15px;
-		width: 80%;
-		justify-self: center;
-
-		p {
-			font-family: $didactGothic;
-		}
+		gap: em(15px);
 	}
 
 	.light-mode & {

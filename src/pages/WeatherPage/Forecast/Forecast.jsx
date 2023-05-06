@@ -1,32 +1,17 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react'
-import ForecastList from '../ForecastList/ForecastList'
+
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useSelector } from 'react-redux'
 import './Forecast.scss'
-import { CircularProgress } from '@mui/material'
-import { ErrorBoundary } from 'react-error-boundary'
-import ErrorMsg from '../ErrorMsg/ErrorMsg'
-import SkeletonList from '../ForecastList/SkeletonList'
+import ErrorMsg from '../../../components/ErrorMsg/ErrorMsg'
+import SkeletonList from '../../../components/ForecastList/SkeletonList'
+import ForecastList from '../../../components/ForecastList/ForecastList'
 
 export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	const favorites = useSelector(state => state.location.favorites)
 	const currLocation = useSelector(state => state.location.currLocation)
 	const status = useSelector(state => state.location.status)
-
-	// useEffect(() => {
-	// 	async function getCurrLocationDetails() {
-	// 		try {
-	// 			const [currWeather, forecast] = await Promise.all([
-	// 				apiWeather.getCurrWeather(locationData.id),
-	// 				apiWeather.getForecasts(locationData.id),
-	// 			])
-	// 			setIsLoading(false)
-	// 		} catch (error) {
-
-	// 		}
-	// 	}
-	// 	getCurrLocationDetails()
-	// }, [currLocation])
+	//const status = 'loading'
 
 	const isFav = useMemo(
 		() => favorites.some(fav => fav.id === currLocation.id),
@@ -38,7 +23,12 @@ export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	}
 
 	if (status === 'failed') {
-		return <ErrorMsg resetErrorBoundary={loadLastLocation} />
+		return (
+			<ErrorMsg
+				error={currLocation.id ? 'connection to server lost' : null}
+				callback={loadLastLocation}
+			/>
+		)
 	}
 
 	return (

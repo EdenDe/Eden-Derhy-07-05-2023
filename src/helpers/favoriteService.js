@@ -1,6 +1,6 @@
 'use strict'
 
-import { storageService } from './async-storage.js'
+import { storageService } from './asyncStorage.js'
 
 const FAVORITES_KEY = 'favoriteDB'
 

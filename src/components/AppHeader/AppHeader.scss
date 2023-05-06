@@ -3,7 +3,7 @@
 @import '../../assets/scss/setup/functions';
 
 .app-header {
-	height: 10vh;
+	height: em(90px);
 	align-items: center;
 	justify-content: flex-start;
 	box-shadow: 1px -1px 4px 1px $clr3;
@@ -22,7 +22,7 @@
 	}
 
 	.nav-bar {
-		gap: 15px;
+		gap: em(15px);
 		margin-left: auto;
 		a {
 			padding: em(10px);
@@ -54,23 +54,23 @@
 		.nav-bar.open {
 			display: flex;
 			flex-direction: column;
-			gap: 5px;
+			gap: em(5px);
 
 			position: absolute;
-			top: 10vh;
+			top: em(90px);
 			left: 0;
 
 			z-index: 200;
-			margin-top: 5px;
+			margin-top: em(5px);
 			background-color: $clr1;
-			padding: 10px;
+			padding: em(10px);
 			width: 60vw;
 			@include themify('background-color', 'bg');
 			@include themify('color', 'fc');
 
 			a {
 				border-bottom: 1px solid $clr2;
-				padding: 10px;
+				padding: em(10px);
 				margin: 0;
 			}
 		}

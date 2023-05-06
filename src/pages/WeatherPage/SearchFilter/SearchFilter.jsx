@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
-import { utils } from '../../helpers/utils'
+import { weatherApi } from '../../../helpers/weatherApi'
+import { utils } from '../../../helpers/utils'
 import './SearchFilter.scss'
-import { apiWeather } from '../../helpers/apiWeatherCalls'
-import { useSelector } from 'react-redux'
 
 export default function SearchFilter({ setLocation }) {
-	const currLocation = useSelector(state => state.location.currLocation.name)
-
-	const [options, setOptions] = useState([])
+	const [cityOptions, setCityOptions] = useState([])
 	const [error, setError] = useState(null)
 
 	async function getOptions(searchInput) {
 		try {
-			const options = await apiWeather.getCities(searchInput)
-			setOptions(options)
+			const options = await weatherApi.getCities(searchInput)
+			setCityOptions(options)
 		} catch (error) {
 			setError('sorry, an error occurred, please try again later')
 		}
 	}
 
-	function changeHandler(ev) {
+	function onSearch(ev) {
 		const { value = '' } = ev.target
 
-		if (value === currLocation.name) return
 		if (utils.regexCheckEngLettersOnly(value)) {
 			setError('invalid input')
 			return
 		}
 
+		setError(null)
+		if (value === '') return
+
 		const setDebounceInput = utils.debounce(() => getOptions(value), 1000)
 		setDebounceInput()
-		setError(null)
+	}
 
-		if (options && options[value]) {
-			setLocation(value, options[value].id)
+	function onSelectCity(value) {
+		if (cityOptions && cityOptions[value]) {
+			setLocation(value, cityOptions[value].id)
 		}
 	}
 
@@ -42,19 +42,20 @@ export default function SearchFilter({ setLocation }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
+					loading={cityOptions.length}
 					className='autocomplete'
-					disabled={!!error}
-					options={Object.keys(options)}
+					disabled={error && error !== 'invalid input'}
+					options={Object.keys(cityOptions)}
 					renderOption={(props, option) => (
 						<option {...props} value={option}>
 							{option}
 						</option>
 					)}
-					onSelect={changeHandler}
+					onChange={(event, option) => onSelectCity(option)}
 					renderInput={params => (
 						<TextField
 							error={!!error}
-							onChange={changeHandler}
+							onChange={onSearch}
 							{...params}
 							label='Select a city'
 							variant='outlined'

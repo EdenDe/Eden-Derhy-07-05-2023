@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { utils } from './utils'
 
-export const apiWeather = {
+export const weatherApi = {
 	getForecasts,
 	getCities,
 	getCurrWeather,

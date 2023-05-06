@@ -1,5 +1,8 @@
+@import '../../../assets/scss/setup/functions';
+
 .search-filter {
 	display: grid;
+	height: rem(80px);
 	.form-control {
 		min-width: 300px;
 		justify-self: center;

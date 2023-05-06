@@ -1,16 +1,32 @@
 export const getDesignTokens = mode => ({
+	typography: {
+		fontFamily: [
+			'didactGothic',
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(','),
+	},
 	palette: {
 		mode,
 		...(mode === 'light'
 			? {
 					// palette values for light mode
 					primary: {
-						main: '#fff',
+						main: '#202124',
 					},
 					divider: '#e8eaed',
 					text: {
 						primary: '#202124',
 						secondary: '#919191',
+						disabled: 'red',
 					},
 			  }
 			: {
@@ -26,6 +42,7 @@ export const getDesignTokens = mode => ({
 					text: {
 						primary: '#e8eaed',
 						secondary: '#fff',
+						disabled: 'red',
 					},
 			  }),
 	},

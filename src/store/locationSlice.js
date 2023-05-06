@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { favoriteService } from '../helpers/favorite.service'
+import { favoriteService } from '../helpers/favoriteService'
 import { toast } from 'react-toastify'
-import { apiWeather } from '../helpers/apiWeatherCalls'
+import { weatherApi } from '../helpers/weatherApi'
 
 export const saveToFavs = createAsyncThunk(
 	'location/saveToFavs',
 	async (locationData, { getState, rejectWithValue }) => {
 		try {
-			const { currLocation } = getState().location
+			const currLocation = { ...getState().location.currLocation }
+			debugger
 			delete currLocation.forecast
 			return await favoriteService.save(currLocation)
 		} catch (error) {
@@ -37,8 +38,8 @@ export const setCurrLocation = createAsyncThunk(
 	async (locationData, { rejectWithValue }) => {
 		try {
 			const [currWeather, forecast] = await Promise.all([
-				apiWeather.getCurrWeather(locationData.id),
-				apiWeather.getForecasts(locationData.id),
+				weatherApi.getCurrWeather(locationData.id),
+				weatherApi.getForecasts(locationData.id),
 			])
 
 			return {
@@ -69,7 +70,6 @@ const locationSlice = createSlice({
 	},
 	reducers: {
 		loadLocation(state) {
-			//TODO: change name
 			state.status = 'success'
 		},
 	},

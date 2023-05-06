@@ -1,5 +1,9 @@
+@import '../../assets/scss/setup/functions';
+
 .forecast-list {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(150px, auto));
-	gap: 30px;
+	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+	gap: em(30px);
+	justify-content: center;
+	align-content: start;
 }

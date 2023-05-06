@@ -21,18 +21,20 @@ export default function ForecastCard({ forecast, setLocation }) {
 			onClick={onChooseCard}
 		>
 			<Typography variant='h5'>{isLocationCard ? forecast.name : dayName}</Typography>
-			<div className='img-wrapper'>
-				<CardMedia alt={weatherIcon} image={imgSrc} component='img' />
-			</div>
-			<CardContent className='temp-details flex justify-center'>
-				{minTemp && (
-					<Typography className='min-temp' data-temp-unit={minTemp.Unit}>
-						{minTemp.Value}
+			<CardMedia className='weather-img' alt={weatherIcon} image={imgSrc} component='img' />
+			<Typography variant='subtitle1'>{forecast.weatherText}</Typography>
+
+			<CardContent>
+				<div className='temp-details flex justify-center'>
+					{minTemp && (
+						<Typography className='min-temp' data-temp-unit={minTemp.Unit}>
+							{minTemp.Value}
+						</Typography>
+					)}
+					<Typography className='max-temp' data-temp-unit={maxTemp.Unit}>
+						{maxTemp.Value}
 					</Typography>
-				)}
-				<Typography className='max-temp' data-temp-unit={maxTemp.Unit}>
-					{maxTemp.Value}
-				</Typography>
+				</div>
 			</CardContent>
 		</Card>
 	)

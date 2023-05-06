@@ -48,7 +48,10 @@ button {
 	cursor: pointer;
 }
 
-input {
+input,
+fieldset,
+select,
+label {
 	font-family: inherit;
 }
 
