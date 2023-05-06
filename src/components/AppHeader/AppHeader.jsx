@@ -24,10 +24,6 @@ export default function AppHeader({ mode, setMode, tempUnit, setTempUnit }) {
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [settingsOpen, setSettingsOpen] = useState(false)
 
-	function toggleMenu() {
-		setMenuOpen(prevState => !prevState)
-	}
-
 	function toggleSettings() {
 		setSettingsOpen(prevState => !prevState)
 	}
@@ -107,9 +103,6 @@ export default function AppHeader({ mode, setMode, tempUnit, setTempUnit }) {
 							<MenuIcon fill='text.primary' />
 						</IconButton>
 						<Menu />
-						{/* <IconButton onClick={setMode} color='inherit'>
-							{mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-						</IconButton> */}
 					</div>
 				</div>
 			</section>

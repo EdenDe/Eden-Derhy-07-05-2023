@@ -1,13 +1,12 @@
-import React, { Suspense, useEffect, useMemo, useState } from 'react'
-
+import { useMemo } from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useSelector } from 'react-redux'
-import './Forecast.scss'
 import ErrorMsg from '../../../components/ErrorMsg/ErrorMsg'
 import SkeletonList from '../../../components/ForecastList/SkeletonList'
 import ForecastList from '../../../components/ForecastList/ForecastList'
-import { Button, IconButton, Typography } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { utils } from '../../../helpers/utils'
+import './Forecast.scss'
 
 export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	const favorites = useSelector(state => state.location.favorites)
@@ -40,23 +39,33 @@ export default function Forecast({ toggleFavorite, loadLastLocation }) {
 
 	return (
 		<section className='forecast '>
-			<div className='flex curr-weather-details'>
-				<div className='grid'>
-					<span className='location-name'>{currLocation.name}</span>
-					<span data-temp-unit={prefUnit}>
-						<TempInCorrectUnit
-							currUnit={currLocation.currWeather.maxTemp.Unit}
-							temp={currLocation.currWeather.maxTemp.Value}
-						/>
-					</span>
-				</div>
-				<Button className='btn-favorite flex align-center' onClick={() => toggleFavorite(isFav)}>
+			<div className='curr-weather-details'>
+				<h1 className='location-name'>{currLocation.name}</h1>
+				<span className='location-date'>
+					{Intl.DateTimeFormat('en', { dateStyle: 'full' }).format(
+						new Date(currLocation.currWeather.date)
+					)}
+				</span>
+				<span className='location-temp' data-temp-unit={prefUnit}>
+					<TempInCorrectUnit
+						currUnit={currLocation.currWeather.maxTemp.Unit}
+						temp={currLocation.currWeather.maxTemp.Value}
+					/>
+				</span>
+				<IconButton
+					className='btn-favorite flex align-center'
+					onClick={() => toggleFavorite(isFav)}
+				>
 					<FavoriteIcon className={`icon icon-heart  ${isFav ? 'favorite' : ''} `} />
-					<span>{isFav ? 'Remove' : 'Add'} from favorites </span>
-				</Button>
+				</IconButton>
+				<img
+					alt={currLocation.currWeather.weatherText}
+					className='weather-img'
+					src={`${process.env.REACT_APP_API_WEATHER_ICON}${currLocation.currWeather.weatherIcon}-s.png`}
+				/>
+				<span className='weather-txt'>{currLocation.currWeather.weatherText}</span>
 			</div>
 
-			<h3 className='weather-txt'>{currLocation.currWeather.weatherText}</h3>
 			<ForecastList forecastList={currLocation.forecast} />
 		</section>
 	)
