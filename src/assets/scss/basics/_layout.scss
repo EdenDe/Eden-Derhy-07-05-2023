@@ -30,19 +30,4 @@
 	padding-top: 3vh;
 	min-height: calc(100vh - em(90px));
 	display: grid;
-
-	.screen {
-		background-color: rgba(rgb(70, 70, 70), 0.5);
-		z-index: 10;
-		position: absolute;
-		inset: 0;
-		top: rem(90px);
-		display: none;
-	}
-
-	.app-header:has(.nav-bar.open) ~ & {
-		.screen {
-			display: block;
-		}
-	}
 }

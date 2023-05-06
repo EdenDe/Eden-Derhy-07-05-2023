@@ -1,5 +1,3 @@
-'use strict'
-
 import { storageService } from './asyncStorage.js'
 
 const FAVORITES_KEY = 'favoriteDB'
@@ -21,8 +19,3 @@ function remove(favoriteId) {
 function save(favorite) {
 	return storageService.post(FAVORITES_KEY, favorite)
 }
-
-// function _createFavorites() {
-// 	let favorites = utilService.loadFromStorage(FAVORITES_KEY) || []
-
-// }

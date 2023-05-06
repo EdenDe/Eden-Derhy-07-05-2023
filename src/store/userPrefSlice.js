@@ -1,23 +1,27 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { favoriteService } from '../helpers/favoriteService'
-import { toast } from 'react-toastify'
-import { weatherApi } from '../helpers/weatherApi'
+import { createSlice } from '@reduxjs/toolkit'
+import { userPrefService, MODE_KEY, TEMP_UNIT_KEY } from '../helpers/userPrefService'
+
+const initialState = {
+	tempUnit: userPrefService.getCookie(TEMP_UNIT_KEY),
+	mode: userPrefService.getCookie(MODE_KEY),
+}
 
 const userPrefSlice = createSlice({
 	name: 'locationSlice',
-	initialState: {
-		degreesUnit: 'C',
-		theme: 'light',
-	},
+	initialState,
 	reducers: {
-		setDegreeUnit(state, action) {
-			state.degreesUnit = action.payload
+		toggleTempUnit(state, action) {
+			const unit = state.tempUnit === 'C' ? 'F' : 'C'
+			userPrefService.setCookie(TEMP_UNIT_KEY, unit)
+			state.tempUnit = unit
 		},
-		setTheme(state, action) {
-			state.theme = action.payload
+		toggleMode(state, action) {
+			const mode = state.mode === 'dark' ? 'light' : 'dark'
+			userPrefService.setCookie(MODE_KEY, mode)
+			state.mode = mode
 		},
 	},
 })
 
 export default userPrefSlice.reducer
-export const { loadLocation } = userPrefSlice.actions
+export const { toggleMode, toggleTempUnit } = userPrefSlice.actions

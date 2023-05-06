@@ -30,13 +30,36 @@
 			font-size: em(18px);
 
 			&.active {
-				color: $secondary;
+				@include themify('color', 'logo-fc');
 			}
 		}
 	}
 
 	.nav-ham {
 		display: none;
+	}
+
+	.settings-menu {
+		position: relative;
+	}
+
+	.settings-popper {
+		position: absolute;
+		right: 0;
+		z-index: 5;
+	}
+
+	.menu-item {
+		span {
+			text-transform: capitalize;
+			margin-inline-end: em(5px);
+		}
+
+		.toggle-btn-group {
+			width: 100%;
+			display: grid;
+			grid-auto-flow: column;
+		}
 	}
 
 	@include for-mobile-layout {
@@ -54,17 +77,18 @@
 		.nav-bar.open {
 			display: flex;
 			flex-direction: column;
-			gap: em(5px);
 
 			position: absolute;
 			top: em(90px);
 			left: 0;
+			right: 0;
+			bottom: 0;
 
-			z-index: 200;
-			margin-top: em(5px);
+			z-index: 2;
+			margin: 0;
 			background-color: $clr1;
 			padding: em(10px);
-			width: 60vw;
+
 			@include themify('background-color', 'bg');
 			@include themify('color', 'fc');
 

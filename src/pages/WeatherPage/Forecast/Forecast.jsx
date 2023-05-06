@@ -6,11 +6,14 @@ import './Forecast.scss'
 import ErrorMsg from '../../../components/ErrorMsg/ErrorMsg'
 import SkeletonList from '../../../components/ForecastList/SkeletonList'
 import ForecastList from '../../../components/ForecastList/ForecastList'
+import { Button, IconButton, Typography } from '@mui/material'
+import { utils } from '../../../helpers/utils'
 
 export default function Forecast({ toggleFavorite, loadLastLocation }) {
 	const favorites = useSelector(state => state.location.favorites)
 	const currLocation = useSelector(state => state.location.currLocation)
 	const status = useSelector(state => state.location.status)
+	const prefUnit = useSelector(state => state.userPref.tempUnit)
 	//const status = 'loading'
 
 	const isFav = useMemo(
@@ -31,22 +34,26 @@ export default function Forecast({ toggleFavorite, loadLastLocation }) {
 		)
 	}
 
+	function TempInCorrectUnit({ currUnit, temp }) {
+		return utils.getTempInCorrectUnit(prefUnit, currUnit, temp)
+	}
+
 	return (
-		<section className='forecast'>
-			<div className='flex'>
+		<section className='forecast '>
+			<div className='flex curr-weather-details'>
 				<div className='grid'>
-					<span>{currLocation.name}</span>
-					<span data-temp-unit={currLocation.currWeather.maxTemp.Unit}>
-						{currLocation.currWeather.maxTemp.Value}
+					<span className='location-name'>{currLocation.name}</span>
+					<span data-temp-unit={prefUnit}>
+						<TempInCorrectUnit
+							currUnit={currLocation.currWeather.maxTemp.Unit}
+							temp={currLocation.currWeather.maxTemp.Value}
+						/>
 					</span>
 				</div>
-				<div className='action-btns flex align-center'>
-					<FavoriteIcon
-						onClick={() => toggleFavorite(isFav)}
-						className={`icon icon-heart  ${isFav ? 'favorite' : ''} `}
-					/>
-					<button> change to F </button>
-				</div>
+				<Button className='btn-favorite flex align-center' onClick={() => toggleFavorite(isFav)}>
+					<FavoriteIcon className={`icon icon-heart  ${isFav ? 'favorite' : ''} `} />
+					<span>{isFav ? 'Remove' : 'Add'} from favorites </span>
+				</Button>
 			</div>
 
 			<h3 className='weather-txt'>{currLocation.currWeather.weatherText}</h3>

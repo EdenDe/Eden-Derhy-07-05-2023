@@ -42,7 +42,7 @@ export default function SearchFilter({ setLocation }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
-					loading={cityOptions.length}
+					loading={!!cityOptions.length}
 					className='autocomplete'
 					disabled={error && error !== 'invalid input'}
 					options={Object.keys(cityOptions)}

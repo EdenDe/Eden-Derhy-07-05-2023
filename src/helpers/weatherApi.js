@@ -10,11 +10,11 @@ export const weatherApi = {
 const API_KEY = process.env.REACT_APP_API_KEY_WEATHER
 const BASE_URL = process.env.REACT_APP_API_WEATHER_BASE_URL
 
-async function getForecasts(locationKey) {
+async function getForecasts(locationKey, isMetric) {
 	try {
 		const result = await axios.get(
 			BASE_URL +
-				`forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&language=en-us&details=false&metric=true`
+				`forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&language=en-us&details=false&metric=${isMetric}`
 		)
 
 		return result.data.DailyForecasts.map(({ Date, Day, Temperature }) => {
@@ -47,7 +47,7 @@ async function getCities(locationName) {
 	}
 }
 
-async function getCurrWeather(locationKey) {
+async function getCurrWeather(locationKey, isMetric) {
 	try {
 		const result = await axios.get(
 			BASE_URL +
@@ -55,7 +55,12 @@ async function getCurrWeather(locationKey) {
 		)
 
 		const { LocalObservationDateTime, WeatherIcon, WeatherText, Temperature } = result.data[0]
-		return _createWeather(LocalObservationDateTime, WeatherIcon, WeatherText, Temperature['Metric'])
+		return _createWeather(
+			LocalObservationDateTime,
+			WeatherIcon,
+			WeatherText,
+			Temperature[isMetric ? 'Metric' : 'Imperial']
+		)
 	} catch (error) {
 		return Promise.reject('could not get current weather')
 	}

@@ -4,22 +4,34 @@
 	padding: em(30px);
 	font-size: em(20px);
 
-	.icon-heart {
-		stroke: black;
-		fill: white;
-
-		&.favorite {
-			fill: red;
-		}
-	}
-
-	.action-btns {
-		margin-left: auto;
-	}
-
 	.weather-txt {
 		font-size: em(30px);
 		text-align: center;
 		margin: em(10px);
+	}
+
+	.curr-weather-details {
+		max-width: 1000px;
+		margin: auto;
+
+		.btn-favorite {
+			margin-left: auto;
+			gap: em(5px);
+			text-transform: capitalize;
+
+			.icon-heart {
+				stroke: black;
+				fill: white;
+
+				&.favorite {
+					fill: red;
+				}
+			}
+		}
+
+		.location-name {
+			text-transform: capitalize;
+			font-size: em(18px);
+		}
 	}
 }

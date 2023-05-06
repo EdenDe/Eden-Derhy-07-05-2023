@@ -35,11 +35,12 @@ export const removeFromFavs = createAsyncThunk(
 
 export const setCurrLocation = createAsyncThunk(
 	'location/setCurrLocation',
-	async (locationData, { rejectWithValue }) => {
+	async (locationData, { rejectWithValue, getState }) => {
 		try {
+			const isMetric = getState().userPref.tempUnit === 'C'
 			const [currWeather, forecast] = await Promise.all([
-				weatherApi.getCurrWeather(locationData.id),
-				weatherApi.getForecasts(locationData.id),
+				weatherApi.getCurrWeather(locationData.id, isMetric),
+				weatherApi.getForecasts(locationData.id, isMetric),
 			])
 
 			return {
@@ -58,7 +59,9 @@ export const setCurrLocation = createAsyncThunk(
 export const setFavorites = createAsyncThunk('location/setFavorites', async () => {
 	try {
 		return await favoriteService.query()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 })
 
 const locationSlice = createSlice({

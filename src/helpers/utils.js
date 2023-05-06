@@ -2,7 +2,7 @@ export const utils = {
 	makeId,
 	debounce,
 	regexCheckEngLettersOnly,
-	isDateBeforeToday,
+	getTempInCorrectUnit,
 }
 
 function makeId(length = 6) {
@@ -31,6 +31,10 @@ function regexCheckEngLettersOnly(value) {
 	return !/^[a-zA-Z]+$/.test(value)
 }
 
-function isDateBeforeToday(date) {
-	return new Date(new Date(date).toDateString()) < new Date(new Date().toDateString())
+function getTempInCorrectUnit(prefUnit, unit, temp) {
+	if (prefUnit === unit) return temp
+	if (prefUnit === 'F') {
+		return (1.8 * temp + 32).toFixed(2)
+	}
+	return ((temp - 32) * (5 / 9)).toFixed(2)
 }

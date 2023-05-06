@@ -22,6 +22,7 @@ export const getDesignTokens = mode => ({
 					primary: {
 						main: '#202124',
 					},
+
 					divider: '#e8eaed',
 					text: {
 						primary: '#202124',
@@ -34,6 +35,7 @@ export const getDesignTokens = mode => ({
 					primary: {
 						main: '#ecc456',
 					},
+
 					divider: '#ffe168',
 					background: {
 						default: '#202124',

@@ -46,6 +46,7 @@
 
 [data-temp-unit]::after {
 	content: '°' attr(data-temp-unit);
+	place-self: center;
 }
 
 .loader-wrapper {
