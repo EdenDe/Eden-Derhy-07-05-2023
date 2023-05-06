@@ -15,7 +15,6 @@ This is a simple weather app that displays the current weather and a 5-day forec
 <ul> 
 <li> React </li>
 <li> Redux Toolkit </li>
-<li> Axios </li>
 <li> SCSS </li>
 <li> AccuWeather API </li>
 </ul>
