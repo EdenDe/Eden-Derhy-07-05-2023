@@ -20,3 +20,15 @@ This is a simple weather app that displays the current weather and a 5-day forec
 <li> AccuWeather API </li>
 </ul>
 
+<h3> Favorite page in dark mode </h3>
+
+![image](https://user-images.githubusercontent.com/93701509/236643210-ec1af9f3-c3d5-431b-ac6d-2583fff75ab4.png)
+
+<h3> Weather page in light mode </h3>
+
+![image](https://user-images.githubusercontent.com/93701509/236643224-69b22fdd-4689-4ed0-b4c7-1622770670cb.png)
+
+<h3> Search and toggle theme & unit degree </h3>
+
+![image](https://user-images.githubusercontent.com/93701509/236643236-8e3e7117-ad4f-4340-9e67-6ef5dfcf9c7f.png)
+![image](https://user-images.githubusercontent.com/93701509/236643241-6a9ee805-bc65-45da-a890-7b5394b14631.png)
