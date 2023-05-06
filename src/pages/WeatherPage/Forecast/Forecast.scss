@@ -1,5 +1,6 @@
 @import '../../../assets/scss/setup/functions';
 @import '../../../assets/scss/setup/mixins';
+@import '../../../assets/scss/setup/variables';
 
 .forecast {
 	padding: em(10px) em(30px) em(30px);
@@ -60,6 +61,15 @@
 			align-self: center;
 			text-transform: capitalize;
 			font-size: em(25px);
+		}
+
+		@include for-mobile-layout {
+			grid-template-columns: 0.5fr 1fr 1fr;
+			grid-template-areas:
+				'heartBtn locationName locationName'
+				'nothing locationDate locationDate'
+				'locationTemp locationTemp weatherImg'
+				'locationTemp locationTemp weatherText';
 		}
 	}
 }

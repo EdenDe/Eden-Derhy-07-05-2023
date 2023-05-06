@@ -1,4 +1,6 @@
 @import '../../assets/scss/setup/functions';
+@import '../../assets/scss/setup/mixins';
+@import '../../assets/scss/setup/variables';
 
 .forecast-list {
 	display: grid;
@@ -6,4 +8,8 @@
 	gap: em(30px);
 	justify-content: center;
 	align-content: start;
+
+	@include for-mobile-layout {
+		justify-content: stretch;
+	}
 }

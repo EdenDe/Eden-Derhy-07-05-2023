@@ -4,5 +4,7 @@
 	h3 {
 		text-align: center;
 		margin: auto 0;
+		padding: 20px;
+		font-size: clamp(32px, 5vw, 60px);
 	}
 }

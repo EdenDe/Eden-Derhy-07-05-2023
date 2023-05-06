@@ -31,19 +31,6 @@
 		minmax(auto, $layoutPadding);
 }
 
-@mixin themeColors($txtClr: $clr3, $bgColor: $clr0) {
-	background-color: $bgColor;
-	color: $txtClr;
-
-	&.dark-mode,
-	body.dark-mode & {
-		background-color: $txtClr;
-		* {
-			color: $bgColor;
-		}
-	}
-}
-
 @mixin themify($property, $key, $themes: $themes) {
 	@each $theme, $colors in $themes {
 		&.#{$theme}-mode,
