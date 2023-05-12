@@ -1,14 +1,11 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
-import { utils } from '../../helpers/utils'
 import './ForecastCard.scss'
 
 export default function ForecastCard({ forecast, setLocation }) {
-	const prefUnit = useSelector(state => state.userPref.tempUnit)
-	const isLocationCard = !!forecast.currWeather
+	const isLocationCard = !!forecast.weather
 
 	const { minTemp, maxTemp, date, weatherIcon, weatherText } = isLocationCard
-		? forecast.currWeather
+		? forecast.weather
 		: forecast
 	const imgSrc = `${process.env.REACT_APP_API_WEATHER_ICON}${weatherIcon}-s.png`
 
@@ -20,10 +17,6 @@ export default function ForecastCard({ forecast, setLocation }) {
 	const title = isLocationCard
 		? forecast.name
 		: new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date(date))
-
-	function TempInCorrectUnit({ currUnit, temp }) {
-		return utils.getTempInCorrectUnit(prefUnit, currUnit, temp)
-	}
 
 	return (
 		<Card
@@ -37,12 +30,12 @@ export default function ForecastCard({ forecast, setLocation }) {
 			<CardContent>
 				<div className='temp-details flex justify-center'>
 					{minTemp && (
-						<Typography className='min-temp' data-temp-unit={prefUnit}>
-							<TempInCorrectUnit currUnit={minTemp.Unit} temp={minTemp.Value} />
+						<Typography className='min-temp' data-temp-unit={minTemp.unit}>
+							{minTemp.value}
 						</Typography>
 					)}
-					<Typography className='max-temp' data-temp-unit={prefUnit}>
-						<TempInCorrectUnit currUnit={maxTemp.Unit} temp={maxTemp.Value} />
+					<Typography className='max-temp' data-temp-unit={maxTemp.unit}>
+						{maxTemp.value}
 					</Typography>
 				</div>
 			</CardContent>

@@ -35,7 +35,7 @@ export default function AppHeader({ mode, setMode, tempUnit, setTempUnit }) {
 				className='toggle-btn-group'
 				value={currentValue}
 				exclusive
-				onChange={toggleFunc}
+				onChange={(ev, newValue) => toggleFunc(newValue || currentValue)}
 			>
 				{options.map((option, index) => (
 					<ToggleButton value={option} key={option + index}>
@@ -55,8 +55,8 @@ export default function AppHeader({ mode, setMode, tempUnit, setTempUnit }) {
 	function Menu() {
 		return (
 			<div className='settings-menu'>
-				<IconButton onClick={toggleSettings}>
-					<SettingsIcon fill='text.primary' />
+				<IconButton onClick={toggleSettings} className='btn-settings'>
+					<SettingsIcon />
 				</IconButton>
 				<Paper hidden={!settingsOpen} className='settings-popper'>
 					<ClickAwayListener onClickAway={() => setSettingsOpen(false)}>

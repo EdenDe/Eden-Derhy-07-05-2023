@@ -10,18 +10,16 @@ const userPrefSlice = createSlice({
 	name: 'locationSlice',
 	initialState,
 	reducers: {
-		toggleTempUnit(state, action) {
-			const unit = state.tempUnit === 'C' ? 'F' : 'C'
-			userPrefService.setCookie(TEMP_UNIT_KEY, unit)
-			state.tempUnit = unit
+		setPrefTempUnit(state, action) {
+			userPrefService.setCookie(TEMP_UNIT_KEY, action.payload)
+			state.tempUnit = action.payload
 		},
-		toggleMode(state, action) {
-			const mode = state.mode === 'dark' ? 'light' : 'dark'
-			userPrefService.setCookie(MODE_KEY, mode)
-			state.mode = mode
+		setPrefMode(state, action) {
+			userPrefService.setCookie(MODE_KEY, action.payload)
+			state.mode = action.payload
 		},
 	},
 })
 
 export default userPrefSlice.reducer
-export const { toggleMode, toggleTempUnit } = userPrefSlice.actions
+export const { setPrefMode, setPrefTempUnit } = userPrefSlice.actions

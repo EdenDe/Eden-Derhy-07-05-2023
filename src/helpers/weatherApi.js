@@ -38,10 +38,7 @@ async function getCities(locationName) {
 				`locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${locationName}&language=en-us`
 		)
 
-		return result.data?.reduce((newObj, location) => {
-			newObj[location.LocalizedName] = { id: location.Key }
-			return newObj
-		}, {})
+		return result.data.map(location => ({ name: location.LocalizedName, id: location.Key })) || []
 	} catch (error) {
 		return Promise.reject('could not get cities')
 	}

@@ -3,6 +3,7 @@ export const utils = {
 	debounce,
 	regexCheckEngLettersOnly,
 	getTempInCorrectUnit,
+	isAnHourPassed,
 }
 
 function makeId(length = 6) {
@@ -31,10 +32,24 @@ function regexCheckEngLettersOnly(value) {
 	return !/^[a-zA-Z]+$/.test(value)
 }
 
-function getTempInCorrectUnit(prefUnit, unit, temp) {
-	if (prefUnit === unit) return temp
+function getTempInCorrectUnit(prefUnit, { Unit: unit, Value: temp }) {
+	const res = { value: temp, unit: prefUnit }
+	if (prefUnit === unit) return res
 	if (prefUnit === 'F') {
-		return (1.8 * temp + 32).toFixed(2)
+		res.value = (1.8 * temp + 32).toFixed(2)
+	} else {
+		res.value = ((temp - 32) * (5 / 9)).toFixed(2)
 	}
-	return ((temp - 32) * (5 / 9)).toFixed(2)
+
+	return res
+}
+
+function isAnHourPassed(date) {
+	const givenDate = new Date(date)
+	const now = new Date()
+
+	if (givenDate.toLocaleDateString() !== now.toLocaleDateString()) return true
+	const diff = now.getTime() - givenDate.getTime()
+
+	return diff >= 60 * 60 * 1000
 }

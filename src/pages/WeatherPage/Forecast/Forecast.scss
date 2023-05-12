@@ -21,7 +21,7 @@
 
 		.weather-txt {
 			grid-area: weatherText;
-			font-size: em(16px);
+			font-size: clamp(em(12px), 3vw, em(16px));
 			text-align: center;
 		}
 
@@ -66,17 +66,17 @@
 		}
 
 		@include for-mobile-layout {
-			grid-template-columns: 0.4fr 1fr 0.5fr;
+			grid-template-columns: 0.4fr 1fr 0.7fr;
 			gap: em(5px);
 			grid-template-areas:
 				'heartBtn locationName locationName'
 				'nothing locationDate locationDate'
 				'nothing locationTemp weatherImg'
 				'nothing locationTemp weatherText';
-		}
 
-		.location-temp {
-			justify-self: start;
+			.location-temp {
+				justify-self: start;
+			}
 		}
 	}
 }

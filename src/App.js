@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDesignTokens } from './theme/customTheme'
-import { toggleMode, toggleTempUnit } from './store/userPrefSlice'
+import { setPrefMode, setPrefTempUnit } from './store/userPrefSlice'
 
 function App() {
 	const dispatch = useDispatch()
@@ -21,12 +21,12 @@ function App() {
 		return createTheme(getDesignTokens(mode))
 	}, [mode])
 
-	function setMode() {
-		dispatch(toggleMode())
+	function setMode(mode) {
+		dispatch(setPrefMode(mode))
 	}
 
-	function setTempUnit() {
-		dispatch(toggleTempUnit())
+	function setTempUnit(tempUnit) {
+		dispatch(setPrefTempUnit(tempUnit))
 	}
 
 	return (

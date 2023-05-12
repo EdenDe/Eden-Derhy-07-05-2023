@@ -6,6 +6,7 @@ export const favoriteService = {
 	query,
 	remove,
 	save,
+	update,
 }
 
 function query() {
@@ -18,4 +19,8 @@ function remove(favoriteId) {
 
 function save(favorite) {
 	return storageService.post(FAVORITES_KEY, favorite)
+}
+
+function update(favorite) {
+	return storageService.put(FAVORITES_KEY, favorite)
 }

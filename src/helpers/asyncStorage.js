@@ -1,6 +1,7 @@
 export const storageService = {
 	query,
 	post,
+	put,
 	remove,
 }
 
@@ -28,7 +29,19 @@ async function remove(entityType, entityId) {
 	})
 }
 
-// Private functions
+async function put(entityType, updatedEntity) {
+	updatedEntity = JSON.parse(JSON.stringify(updatedEntity))
+	return query(entityType).then(entities => {
+		const idx = entities.findIndex(entity => entity.id === updatedEntity.id)
+		if (idx < 0)
+			throw new Error(
+				`Update failed, cannot find entity with id: ${updatedEntity.id} in: ${entityType}`
+			)
+		entities.splice(idx, 1, updatedEntity)
+		_save(entityType, entities)
+		return updatedEntity
+	})
+}
 
 function _save(entityType, entities) {
 	localStorage.setItem(entityType, JSON.stringify(entities))

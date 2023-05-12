@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TextField, FormHelperText, FormControl, Autocomplete } from '@mui/material'
 import { weatherApi } from '../../../helpers/weatherApi'
 import { utils } from '../../../helpers/utils'
 import './SearchFilter.scss'
+import { useSelector } from 'react-redux'
 
 export default function SearchFilter({ setLocation }) {
-	const [cityOptions, setCityOptions] = useState([])
+	const currLocation = useSelector(state => state.location.currLocation)
+
+	const [cityOptions, setCityOptions] = useState([currLocation])
 	const [error, setError] = useState(null)
+	const [isLoading, setIsLoading] = useState(false)
 
 	async function getOptions(searchInput) {
 		try {
@@ -17,10 +21,14 @@ export default function SearchFilter({ setLocation }) {
 		}
 	}
 
+	useEffect(() => {
+		setIsLoading(false)
+	}, [cityOptions])
+
 	function onSearch(ev) {
 		const { value = '' } = ev.target
 
-		if (utils.regexCheckEngLettersOnly(value)) {
+		if (value !== '' && utils.regexCheckEngLettersOnly(value)) {
 			setError('invalid input')
 			return
 		}
@@ -28,13 +36,14 @@ export default function SearchFilter({ setLocation }) {
 		setError(null)
 		if (value === '') return
 
-		const setDebounceInput = utils.debounce(() => getOptions(value), 1000)
-		setDebounceInput()
+		setIsLoading(true)
+		const getDebounceOptions = utils.debounce(() => getOptions(value), 1000)
+		getDebounceOptions()
 	}
 
 	function onSelectCity(value) {
-		if (cityOptions && cityOptions[value]) {
-			setLocation(value, cityOptions[value].id)
+		if (value?.id && value?.name) {
+			setLocation(value.name, value.id)
 		}
 	}
 
@@ -42,15 +51,18 @@ export default function SearchFilter({ setLocation }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
-					loading={!!cityOptions.length}
+					loading={isLoading}
 					className='autocomplete'
 					disabled={error && error !== 'invalid input'}
-					options={Object.keys(cityOptions)}
-					renderOption={(props, option) => (
-						<option {...props} value={option}>
-							{option}
-						</option>
-					)}
+					getOptionLabel={option => option.name}
+					options={cityOptions}
+					renderOption={(props, option) => {
+						return (
+							<option {...props} value={option.name}>
+								{option.name}
+							</option>
+						)
+					}}
 					onChange={(event, option) => onSelectCity(option)}
 					renderInput={params => (
 						<TextField
