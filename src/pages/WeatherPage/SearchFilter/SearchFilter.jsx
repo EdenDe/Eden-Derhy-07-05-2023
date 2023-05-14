@@ -51,7 +51,7 @@ export default function SearchFilter({ setLocation }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
-					loading={isLoading}
+					loading={isLoading || !currLocation}
 					className='autocomplete'
 					disabled={error && error !== 'invalid input'}
 					getOptionLabel={option => option.name}

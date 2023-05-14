@@ -62,7 +62,6 @@ export const setFavorites = createAsyncThunk('location/setFavorites', async () =
 		return await favoriteService.query()
 	} catch (error) {
 		console.error(error)
-		//return rejectWithValue('could not load favorites')
 	}
 })
 
