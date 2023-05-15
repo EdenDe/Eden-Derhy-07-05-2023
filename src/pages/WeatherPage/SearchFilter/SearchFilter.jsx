@@ -8,7 +8,10 @@ import { useSelector } from 'react-redux'
 export default function SearchFilter({ setLocation }) {
 	const currLocation = useSelector(state => state.location.currLocation)
 
-	const [cityOptions, setCityOptions] = useState([currLocation])
+	const [cityOptions, setCityOptions] = useState([
+		{ name: currLocation.name || 'tel aviv', id: currLocation.id || '215854' },
+	])
+
 	const [error, setError] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -34,7 +37,7 @@ export default function SearchFilter({ setLocation }) {
 		}
 
 		setError(null)
-		if (value === '') return
+		if (value === '' || currLocation.name === value) return
 
 		setIsLoading(true)
 		const getDebounceOptions = utils.debounce(() => getOptions(value), 1000)
@@ -51,7 +54,7 @@ export default function SearchFilter({ setLocation }) {
 		<section className='search-filter'>
 			<FormControl variant='standard' className='form-control'>
 				<Autocomplete
-					loading={isLoading || !currLocation}
+					loading={isLoading || cityOptions[0].empty}
 					className='autocomplete'
 					disabled={error && error !== 'invalid input'}
 					getOptionLabel={option => option.name}
