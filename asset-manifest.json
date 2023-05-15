@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Eden-Derhy-07-05-2023/static/css/main.52836e8f.css",
-    "main.js": "/Eden-Derhy-07-05-2023/static/js/main.40aa17cb.js",
+    "main.js": "/Eden-Derhy-07-05-2023/static/js/main.2abfb992.js",
     "static/media/DidactGothic-Regular.ttf": "/Eden-Derhy-07-05-2023/static/media/DidactGothic-Regular.6e0f5a538ca3c079571f.ttf",
     "static/media/Sigmar-Regular.ttf": "/Eden-Derhy-07-05-2023/static/media/Sigmar-Regular.daeeaca2f7490cb1c50c.ttf",
     "static/media/empty.svg": "/Eden-Derhy-07-05-2023/static/media/empty.e00968d42e8ba2f3f8bb0b565683489f.svg",
     "static/media/notFound.svg": "/Eden-Derhy-07-05-2023/static/media/notFound.94a08e589450a1e5ba7c88c94b1738e9.svg",
     "index.html": "/Eden-Derhy-07-05-2023/index.html",
     "main.52836e8f.css.map": "/Eden-Derhy-07-05-2023/static/css/main.52836e8f.css.map",
-    "main.40aa17cb.js.map": "/Eden-Derhy-07-05-2023/static/js/main.40aa17cb.js.map"
+    "main.2abfb992.js.map": "/Eden-Derhy-07-05-2023/static/js/main.2abfb992.js.map"
   },
   "entrypoints": [
     "static/css/main.52836e8f.css",
-    "static/js/main.40aa17cb.js"
+    "static/js/main.2abfb992.js"
   ]
 }
